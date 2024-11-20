@@ -23,12 +23,12 @@ public class PostService {
         this.goalRepository = goalRepository;
     }
 
-
-
-
     public void createPost(PostRequest postRequest) {
+        if(postRequest.getGoalId() == null){
+            throw new ResourceNotFoundException("Goal not found");
+        }
         Goal goal = this.goalRepository.findById(postRequest.getGoalId())
-                .orElseThrow(() ->  new ResourceNotFoundException("Goal not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Goal not found"));
 
         Post post  = new Post();
         post.setContent(postRequest.getContent());

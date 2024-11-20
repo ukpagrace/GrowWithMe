@@ -17,6 +17,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @PostMapping()
     public void CreatePost(@RequestBody PostRequest postRequest){
         postService.createPost(postRequest);
     }
