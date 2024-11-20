@@ -1,18 +1,21 @@
 package com.example.GrowWithMe.goal;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.example.GrowWithMe.post.Post;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Goal {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-
+    @OneToMany(mappedBy = "goal")
+    private List<Post> posts;
     @CreationTimestamp
     private LocalDateTime CreatedAt;
 
