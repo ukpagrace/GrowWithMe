@@ -1,9 +1,12 @@
 package com.example.GrowWithMe.post;
 
 
+import com.example.GrowWithMe.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,10 +21,15 @@ public class PostController {
 
     @PostMapping()
     public void createPost(@Valid @RequestBody PostRequest postRequest){
-        postService.createPost(postRequest);
+        try{
+            postService.createPost(postRequest);
+        }catch (ResourceNotFoundException exception){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
+
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{goalId}")
     public List<Post> getPostsForAGoal(@PathVariable Long goalId){
         return postService.getPostsForGoal(goalId);
     }

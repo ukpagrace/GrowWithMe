@@ -4,6 +4,8 @@ package com.example.GrowWithMe.comment;
 import com.example.GrowWithMe.post.PostRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/comments")
 public class CommentController {
@@ -22,8 +24,13 @@ public class CommentController {
         commentService.editComment(id, commentRequest);
     }
 
-    @GetMapping("{id}")
-    public void getCommentsForPost(@PathVariable Long postId){
-        commentService.getCommentForPost(postId);
+    @GetMapping("{postId}")
+    public List<Comment> getCommentsForPost(@PathVariable Long postId){
+        return commentService.getCommentForPost(postId);
+    }
+
+    @DeleteMapping("{commentId}")
+    public void deleteComment(@PathVariable Long commentId){
+        commentService.getCommentForPost(commentId);
     }
 }

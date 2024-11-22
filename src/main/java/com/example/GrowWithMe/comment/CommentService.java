@@ -2,6 +2,7 @@ package com.example.GrowWithMe.comment;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
+import com.example.GrowWithMe.post.Post;
 import com.example.GrowWithMe.post.PostRepository;
 import com.example.GrowWithMe.post.PostRequest;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,13 @@ public class CommentService {
     }
 
     public void createComment(CommentRequest commentRequest) {
-        this.postRepository.findById(commentRequest.getPostId())
+       Post post =  this.postRepository.findById(commentRequest.getPostId())
                 .orElseThrow(() -> new ResourceNotFoundException("post not found"));
 
         Comment comment = new Comment();
         comment.setContent(commentRequest.getComment());
         comment.setParentId(commentRequest.getParentId());
+        comment.setPost(post);
 
         commentRepository.save(comment);
 
@@ -45,5 +47,9 @@ public class CommentService {
 
     public List<Comment> getCommentForPost(Long postId) {
         return this.commentRepository.getCommentsByPost(postId);
+    }
+
+    public void deleteComment(Long commentId) {
+        this.commentRepository.deleteComment(commentId);
     }
 }
