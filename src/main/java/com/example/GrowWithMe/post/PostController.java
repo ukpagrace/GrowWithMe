@@ -1,6 +1,7 @@
 package com.example.GrowWithMe.post;
 
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/post")
 public class PostController {
-
-
     private final PostService postService;
     @Autowired
     public PostController(PostService postService) {
@@ -18,7 +17,7 @@ public class PostController {
     }
 
     @PostMapping()
-    public void CreatePost(@RequestBody PostRequest postRequest){
+    public void createPost(@Valid @RequestBody PostRequest postRequest){
         postService.createPost(postRequest);
     }
 
@@ -29,12 +28,12 @@ public class PostController {
 
 
     @PutMapping("{id}")
-    public void EditPost(@PathVariable Long id, @RequestBody Post post){
+    public void editPost(@PathVariable Long id, @RequestBody Post post){
         postService.editPost(id, post);
     }
 
     @DeleteMapping("{id}")
-    public void DeletePost(@PathVariable Long id){
+    public void deletePost(@PathVariable Long id){
         postService.deletePost(id);
     }
 }

@@ -3,6 +3,7 @@ package com.example.GrowWithMe.goal;
 
 import com.example.GrowWithMe.post.Post;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Name is mandatory")
     private String name;
     @OneToMany(mappedBy = "goal")
     private List<Post> posts;

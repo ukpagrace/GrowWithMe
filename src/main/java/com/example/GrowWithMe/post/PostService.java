@@ -24,9 +24,6 @@ public class PostService {
     }
 
     public void createPost(PostRequest postRequest) {
-        if(postRequest.getGoalId() == null){
-            throw new ResourceNotFoundException("Goal not found");
-        }
         Goal goal = this.goalRepository.findById(postRequest.getGoalId())
                 .orElseThrow(() -> new ResourceNotFoundException("Goal not found"));
 
@@ -48,7 +45,7 @@ public class PostService {
         Post foundPost = this.postRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Post with Id" + id + "not found"));
 
-        foundPost.setDeleted(!foundPost.getDeleted());
+        foundPost.setIsDeleted(!foundPost.getIsDeleted());
     }
 
     public List<Post> getPostsForGoal(Long goalId) {
