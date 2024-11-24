@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: GrowWithMe
+  datasource:
+    username: sa
+    password: password
+    url: jdbc:h2:mem:testdb;MODE=MSSQLServer;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: create-drop
+#    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect

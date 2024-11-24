@@ -1,6 +1,7 @@
 package com.example.GrowWithMe.goal;
 
 
+import com.example.GrowWithMe.goal.model.Goal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

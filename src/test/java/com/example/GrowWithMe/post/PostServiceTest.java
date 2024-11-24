@@ -2,7 +2,7 @@ package com.example.GrowWithMe.post;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
-import com.example.GrowWithMe.goal.Goal;
+import com.example.GrowWithMe.goal.model.Goal;
 import com.example.GrowWithMe.goal.GoalRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
