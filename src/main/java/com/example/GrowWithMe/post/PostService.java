@@ -2,7 +2,7 @@ package com.example.GrowWithMe.post;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
-import com.example.GrowWithMe.goal.Goal;
+import com.example.GrowWithMe.goal.model.Goal;
 import com.example.GrowWithMe.goal.GoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

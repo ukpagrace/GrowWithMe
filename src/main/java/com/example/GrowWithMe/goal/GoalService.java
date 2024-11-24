@@ -1,6 +1,7 @@
 package com.example.GrowWithMe.goal;
 
 
+import com.example.GrowWithMe.goal.model.Goal;
 import org.springframework.stereotype.Service;
 
 @Service

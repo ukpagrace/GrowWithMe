@@ -1,8 +1,8 @@
 package com.example.GrowWithMe.goal;
 
 
+import com.example.GrowWithMe.goal.model.Goal;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
