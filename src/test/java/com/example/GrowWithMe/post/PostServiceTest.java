@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+@ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
 
@@ -28,7 +30,6 @@ public class PostServiceTest {
 
     @Mock
     private PostRepository postRepository;
-
 
     @InjectMocks
     private PostService postService;
@@ -99,6 +100,8 @@ public class PostServiceTest {
         List<Post> posts = postService.getPostsForGoal(goalId);
         Assertions.assertNotNull(posts);
         Assertions.assertEquals(2, posts.size());
+        verify(postRepository, times(1)).FindAllByGoalId(goalId);
+        verify(goalRepository, times(1)).findById(goalId);
     }
 
 }
