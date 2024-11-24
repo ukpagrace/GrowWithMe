@@ -3,11 +3,13 @@ package com.example.GrowWithMe.post;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter
+@Builder
 public class PostRequest {
     @NotBlank(message = "content cannot be empty")
     private String content;

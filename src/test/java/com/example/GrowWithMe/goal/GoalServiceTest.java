@@ -2,6 +2,8 @@ package com.example.GrowWithMe.goal;
 
 
 import com.example.GrowWithMe.goal.model.Goal;
+import com.example.GrowWithMe.goal.repository.GoalRepository;
+import com.example.GrowWithMe.goal.service.GoalService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +27,7 @@ public class GoalServiceTest {
     @Test
     void shouldCreateGoal(){
         Goal newGoal = new Goal();
-        newGoal.setName("renovate my house");
+        newGoal.setTitle("renovate my house");
 
         goalService.add(newGoal);
         verify(goalRepository).save(newGoal);

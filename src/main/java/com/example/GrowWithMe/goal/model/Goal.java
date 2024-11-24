@@ -6,8 +6,7 @@ import com.example.GrowWithMe.tag.Tag;
 import com.example.GrowWithMe.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,13 +15,15 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@Builder
+@RequiredArgsConstructor
 public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @NotBlank(message = "Name is mandatory")
-    private String name;
+    private String title;
     
     @Column(length = 200)
     private String description;

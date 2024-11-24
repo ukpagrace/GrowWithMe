@@ -1,4 +1,4 @@
-package com.example.GrowWithMe.goal;
+package com.example.GrowWithMe.goal.repository;
 
 import com.example.GrowWithMe.goal.model.Goal;
 import org.springframework.data.jpa.repository.JpaRepository;
