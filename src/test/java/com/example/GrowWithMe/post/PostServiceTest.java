@@ -2,8 +2,8 @@ package com.example.GrowWithMe.post;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
-import com.example.GrowWithMe.goal.Goal;
-import com.example.GrowWithMe.goal.GoalRepository;
+import com.example.GrowWithMe.goal.model.Goal;
+import com.example.GrowWithMe.goal.repository.GoalRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
+@ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
 
@@ -28,7 +30,6 @@ public class PostServiceTest {
 
     @Mock
     private PostRepository postRepository;
-
 
     @InjectMocks
     private PostService postService;
@@ -78,7 +79,7 @@ public class PostServiceTest {
         Long goalId = 3L;
         Goal goal = new Goal();
         goal.setId(3L);
-        goal.setName("Code hundred hours");
+        goal.setTitle("Code hundred hours");
         ArrayList<Post> mockPosts = new ArrayList<>();
         Post post1 = new Post();
         post1.setId(1L);
@@ -99,6 +100,8 @@ public class PostServiceTest {
         List<Post> posts = postService.getPostsForGoal(goalId);
         Assertions.assertNotNull(posts);
         Assertions.assertEquals(2, posts.size());
+        verify(postRepository, times(1)).FindAllByGoalId(goalId);
+        verify(goalRepository, times(1)).findById(goalId);
     }
 
 }

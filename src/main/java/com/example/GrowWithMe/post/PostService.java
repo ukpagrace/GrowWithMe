@@ -2,8 +2,9 @@ package com.example.GrowWithMe.post;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
-import com.example.GrowWithMe.goal.Goal;
-import com.example.GrowWithMe.goal.GoalRepository;
+import com.example.GrowWithMe.goal.model.Goal;
+import com.example.GrowWithMe.goal.repository.GoalRepository;
+import com.example.GrowWithMe.post.dto.request.CreatePostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +24,21 @@ public class PostService {
         this.goalRepository = goalRepository;
     }
 
-    public void createPost(PostRequest postRequest) {
+    public CreatePostResponse createPost(PostRequest postRequest) {
         Goal goal = this.goalRepository.findById(postRequest.getGoalId())
                 .orElseThrow(() -> new ResourceNotFoundException("Goal not found"));
 
         Post post  = new Post();
         post.setContent(postRequest.getContent());
         post.setGoal(goal);
-        this.postRepository.save(post);
+        Post savedPost = this.postRepository.save(post);
+
+        return CreatePostResponse.builder()
+                .id(savedPost.getId())
+                .content(savedPost.getContent())
+                .comments(savedPost.getComments())
+                .goalId(goal.getId())
+                .build();
     }
 
 

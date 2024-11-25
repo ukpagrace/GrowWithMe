@@ -1,8 +1,9 @@
-package com.example.GrowWithMe.goal;
+package com.example.GrowWithMe.goal.controller;
 
 
+import com.example.GrowWithMe.goal.model.Goal;
+import com.example.GrowWithMe.goal.service.GoalService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,6 @@ public class GoalController {
     @PostMapping()
     public ResponseEntity<String> createGoal(@Valid @RequestBody Goal goal){
         goalService.add(goal);
-        return new ResponseEntity<String>("Goal created successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>("Goal created successfully", HttpStatus.CREATED);
     }
 }
