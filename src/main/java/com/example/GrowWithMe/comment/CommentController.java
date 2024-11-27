@@ -1,7 +1,6 @@
 package com.example.GrowWithMe.comment;
 
 
-import com.example.GrowWithMe.post.PostRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
