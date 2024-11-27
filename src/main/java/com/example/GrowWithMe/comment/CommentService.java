@@ -4,7 +4,6 @@ package com.example.GrowWithMe.comment;
 import com.example.GrowWithMe.ResourceNotFoundException;
 import com.example.GrowWithMe.post.Post;
 import com.example.GrowWithMe.post.PostRepository;
-import com.example.GrowWithMe.post.PostRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

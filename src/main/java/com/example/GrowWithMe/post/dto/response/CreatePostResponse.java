@@ -1,4 +1,4 @@
-package com.example.GrowWithMe.post.dto.request;
+package com.example.GrowWithMe.post.dto.response;
 
 import com.example.GrowWithMe.comment.Comment;
 import lombok.Builder;

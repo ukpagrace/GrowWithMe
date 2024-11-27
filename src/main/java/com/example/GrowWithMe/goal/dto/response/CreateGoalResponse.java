@@ -1,14 +1,11 @@
 package com.example.GrowWithMe.goal.dto.response;
 
-import com.example.GrowWithMe.post.Post;
-import com.example.GrowWithMe.post.dto.request.CreatePostResponse;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.example.GrowWithMe.post.dto.response.CreatePostResponse;
+import lombok.*;
 
 @Getter @Setter
-@RequiredArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Builder
 public class CreateGoalResponse {
 

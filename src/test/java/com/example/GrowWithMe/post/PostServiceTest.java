@@ -4,11 +4,14 @@ package com.example.GrowWithMe.post;
 import com.example.GrowWithMe.ResourceNotFoundException;
 import com.example.GrowWithMe.goal.model.Goal;
 import com.example.GrowWithMe.goal.repository.GoalRepository;
+import com.example.GrowWithMe.post.dto.request.CreatePostRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -35,7 +38,7 @@ public class PostServiceTest {
     private PostService postService;
 
 
-    private void assertThrowsGoalNotFoundException(Long id, Runnable serviceMethod){
+    private void assertThrowsGoalNotFoundException(Long id, Runnable serviceMethod) {
         when(goalRepository.findById(id)).thenReturn(Optional.empty());
         assertThrows(
                 ResourceNotFoundException.class,
@@ -45,23 +48,36 @@ public class PostServiceTest {
     }
 
     @Test
-    public void PostService_CreatePost_throwsErrorIfGoalNotFound(){
-        PostRequest postRequest = new PostRequest();
-        postRequest.setContent("just finished modelling the kitchen");
-        postRequest.setGoalId(1L);
+    public void PostService_CreatePost_throwsErrorIfGoalNotFound() {
+        CreatePostRequest postRequest = CreatePostRequest
+                .builder()
+                .content("just finished modelling the kitchen")
+                .goalId(1L)
+                .build();
 
         assertThrowsGoalNotFoundException(postRequest.getGoalId(), () -> postService.createPost(postRequest));
     }
+
     @Test
-    public void PostService_CreatePost(){
-        Goal mockGoal = Mockito.mock(Goal.class);
+    public void PostService_CreatePost() {
+        Goal goal = new Goal();
+        goal.setId(1L);
+        goal.setTitle("Code hundred hours");
 
-        PostRequest postRequest = new PostRequest();
-        postRequest.setContent("just finished modelling the kitchen");
-        postRequest.setGoalId(1L);
+        CreatePostRequest postRequest = CreatePostRequest
+                .builder()
+                .content("just finished modelling the kitchen")
+                .goalId(1L)
+                .build();
+
+        Post post = new Post();
+        post.setId(2L);
+        post.setContent(postRequest.getContent());
+        post.setGoal(goal);
 
 
-        when(goalRepository.findById(postRequest.getGoalId())).thenReturn(Optional.of(mockGoal));
+        when(goalRepository.findById(postRequest.getGoalId())).thenReturn(Optional.of(goal));
+        when(postRepository.save(any(Post.class))).thenReturn(post);
 
         postService.createPost(postRequest);
 
@@ -69,13 +85,13 @@ public class PostServiceTest {
     }
 
     @Test
-    public void PostService_GetPostWithGoalId_ThrowErrorGoalIdNotFound(){
+    public void PostService_GetPostWithGoalId_ThrowErrorGoalIdNotFound() {
         Long goalId = 1L;
         assertThrowsGoalNotFoundException(goalId, () -> postService.getPostsForGoal(goalId));
     }
 
     @Test
-    public void PostService_GetPostWithGoalId_ReturnGoal(){
+    public void PostService_GetPostWithGoalId_ReturnGoal() {
         Long goalId = 3L;
         Goal goal = new Goal();
         goal.setId(3L);
