@@ -2,6 +2,7 @@ package com.example.GrowWithMe.post;
 
 
 import com.example.GrowWithMe.ResourceNotFoundException;
+import com.example.GrowWithMe.post.dto.request.CreatePostRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class PostController {
     }
 
     @PostMapping()
-    public void createPost(@Valid @RequestBody PostRequest postRequest){
+    public void createPost(@Valid @RequestBody CreatePostRequest postRequest){
         try{
             postService.createPost(postRequest);
         }catch (ResourceNotFoundException exception){

@@ -16,7 +16,8 @@ import java.util.List;
 @Entity
 @Getter @Setter
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Goal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,8 +31,21 @@ public class Goal {
     
     @Column(length = 100)
     private String image;
+
+    @Column(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
     
-    @OneToMany(mappedBy = "goal", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "goals", fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "goal_subscribers",
+            joinColumns = @JoinColumn(
+                    name = "goal_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"
+            )
+    )
     private List<User> users;
     
     @OneToMany
