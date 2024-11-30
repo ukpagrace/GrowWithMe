@@ -32,11 +32,11 @@ public class Goal {
     @Column(length = 100)
     private String image;
 
-    @Column(name = "user_id")
-    @OneToOne(cascade = CascadeType.ALL)
+//    @Column(name = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
     
-    @ManyToMany(mappedBy = "goals", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "goal_subscribers",
             joinColumns = @JoinColumn(
