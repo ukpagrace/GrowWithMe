@@ -16,7 +16,6 @@ public class PostService {
     PostRepository postRepository;
     GoalRepository goalRepository;
 
-    @Autowired
     public PostService(
             PostRepository postRepository,
             GoalRepository goalRepository
