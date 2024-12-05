@@ -24,7 +24,7 @@ public class LikeService {
     }
 
     public void unlikePost(LikeRequest likeRequest){
-        Like like  = likeRepository.findPostIdAndUserId(likeRequest.getPost_id(), likeRequest.getUser_id());
+        Like like  = likeRepository.findPostByIdAndUserId(likeRequest.getPost_id(), likeRequest.getUser_id());
         like.setIs_deleted(true);
     }
 }

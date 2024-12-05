@@ -4,6 +4,8 @@ package com.example.GrowWithMe.comment;
 import com.example.GrowWithMe.ResourceNotFoundException;
 import com.example.GrowWithMe.post.Post;
 import com.example.GrowWithMe.post.PostRepository;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +15,14 @@ public class CommentService {
 
     CommentRepository commentRepository;
     PostRepository postRepository;
+    private final ModelMapper modelMapper;
     public CommentService(
             CommentRepository commentRepository,
-            PostRepository postRepository
+            PostRepository postRepository, ModelMapper modelMapper
     ) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.modelMapper = modelMapper;
     }
 
     public void createComment(CommentRequest commentRequest) {
@@ -30,8 +34,8 @@ public class CommentService {
         comment.setParentId(commentRequest.getParentId());
         comment.setPost(post);
 
-        commentRepository.save(comment);
-
+        Comment savedComment = commentRepository.save(comment);
+//        return modelMapper.map(savedComment, CommentDto.class);
     }
 
     public void editComment(Long id, CommentRequest commentRequest) {

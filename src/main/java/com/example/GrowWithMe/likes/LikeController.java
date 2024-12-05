@@ -1,6 +1,7 @@
 package com.example.GrowWithMe.likes;
 
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +17,12 @@ public class LikeController {
         this.likeService  = likeService;
     }
 
-    @PostMapping
+    @PostMapping()
     public void LikePost(LikeRequest likeRequest){
         likeService.likePost(likeRequest);
     }
 
-    @PostMapping
+    @DeleteMapping()
     public void unLinkPost(LikeRequest likeRequest){
         likeService.unlikePost(likeRequest);
     }

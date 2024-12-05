@@ -26,8 +26,7 @@ public class Post {
     @JoinColumn(name = "goal_id")
     private Goal goal;
 
-
-    @OneToMany(mappedBy = "post")
+    @OneToMany
     private List<Like> likes;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
